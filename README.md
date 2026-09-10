@@ -19,17 +19,17 @@ Rooftop solar panels in tropical climates lose efficiency to two constant enemie
 Naga 1.2 uses a **heterogeneous FPGA + microcontroller design**, assigning each task to the processor architecturally suited to it:
 
 ```
-   Sensors (RS-485 / Modbus)                Web Dashboard (WiFi)
-            │                                        ▲
-            ▼                                        │
+   Sensors (RS-485 / Modbus)                
+            │                                        
+            ▼                                        
    ┌─────────────────────┐   condition flags   ┌──────────────┐
    │      ESP32-S3        │ ──────────────────► │   FPGA       │
    │  sensing · decisions │      (GPIO)         │  Arty S7-25  │
    │  dashboard · logging │ ◄────────────────── │  control FSM │
    └─────────────────────┘    state readback    └──────────────┘
-                                                        │
-                                                        ▼
-                                              Solid-State Relays
+            │                                            │
+            ▼                                            ▼
+     Web Dashboard (WiFi)                         Solid-State Relays
                                                   Pump · Valve
 ```
 
