@@ -57,9 +57,9 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 
 | Sensor | Measures | Its job in the system |
 |--------|----------|-----------------------|
-| **Solar irradiance** | Incident solar energy (W/m²) | Tells the system how much power is actually available right now — the cost-benefit engine only acts when there's real energy to recover, and never wastes water at night or under cloud |
-| **Temperature / Humidity** | Air temperature & relative humidity (radiation-shielded) | Provides the ambient reference for hazard analysis and rain anticipation — rising humidity with falling temperature signals incoming rain, so the system holds off spraying |
-| **PM2.5 / PM10** | Airborne particulate concentration (µg/m³) | Directly measures dust accumulation to trigger cleaning, and feeds the hazard layer — a particulate surge alongside a temperature rise is a key fire signature |
+| **Solar irradiance** | Incident solar energy (W/m²) | Measures incident solar irradiance and provides an input for estimating potential recoverable energy. — the cost-benefit engine only acts when there's real energy to recover, and never wastes water at night or under cloud |
+| **Temperature / Humidity** | Air temperature & relative humidity (radiation-shielded) | Provides environmental context that can be used to suppress unnecessary actuation under changing weather conditions. — rising humidity with falling temperature signals incoming rain, so the system holds off spraying |
+| **PM2.5 / PM10** | Airborne particulate concentration (µg/m³) |Measures airborne particulate concentration and provides an input/proxy for the system’s cleaning and hazard-detection logic. |
 | **Energy meter** | Voltage, current, power & energy (kWh) | Measures real electrical output, grounding the cost-benefit engine in actual generated power rather than estimates alone and enabling true energy monitoring |
 
 - Custom **Modbus-RTU** implementation with CRC-16 validation, frame synchronisation, echo handling, and automatic retries
