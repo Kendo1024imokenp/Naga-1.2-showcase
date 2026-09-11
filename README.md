@@ -108,7 +108,12 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 
 ## Project Status
 
-Working prototype — built, deployed, and tested. Core control logic verified in simulation and on hardware.
+Individual subsystems (FPGA control logic, sensor network, and decision software) have been verified; full physical integration is in progress.
+
+### FSM Verification (Simulation)
+![Naga 1.2 FSM simulation waveform](images/waveformsim.png)
+*Behavioral simulation in Vivado confirming state transitions, pulse-spray 
+timing, and safety overrides — verified before hardware deployment.*
 
 ---
 
