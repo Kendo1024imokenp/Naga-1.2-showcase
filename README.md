@@ -38,10 +38,9 @@ Naga 1.2 uses a **heterogeneous FPGA + microcontroller design**, assigning each 
 | Layer | Processor | Responsibility |
 |-------|-----------|----------------|
 | **Sensing & Intelligence** | ESP32-S3 | Reads sensors, runs detection & cost-benefit logic, serves dashboard, logs, connectivity |
-| **Real-Time Control** | Arty S7-25 (Spartan-7) | Runs the actuation FSM in hardware — deterministic, uninterruptible pump/valve control |
+| **Real-Time Control** | Arty S7-25 (Spartan-7) | Runs the actuation FSM in dedicated hardware, providing deterministic pump/valve control independent of MCU task scheduling once a condition flag is asserted. |
 
-This separation means the safety-critical control logic runs in dedicated hardware that **cannot be blocked or crashed** by the microcontroller's other tasks.
-
+This separation keeps timing-critical actuation logic in dedicated hardware, so execution does not depend on the microcontroller’s other software tasks once an actuation condition has been issued.
 ---
 
 ## Key Engineering
@@ -57,8 +56,8 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 
 | Sensor | Measures | Its job in the system |
 |--------|----------|-----------------------|
-| **Solar irradiance** | Incident solar energy (W/m²) | Measures incident solar irradiance and provides an input for estimating potential recoverable energy. — the cost-benefit engine only acts when there's real energy to recover, and never wastes water at night or under cloud |
-| **Temperature / Humidity** | Air temperature & relative humidity (radiation-shielded) | Provides environmental context that can be used to suppress unnecessary actuation under changing weather conditions. — rising humidity with falling temperature signals incoming rain, so the system holds off spraying |
+| **Solar irradiance** | Incident solar energy (W/m²) | Measures incident solar irradiance and provides an input for estimating potential recoverable energy, helping suppress unnecessary actuation when available solar input is low, such as at night or under heavy cloud. |
+| **Temperature / Humidity** | Air temperature & relative humidity (radiation-shielded) | Provides environmental context that can be used to suppress unnecessary actuation under changing weather conditions. Rising humidity together with falling temperature can indicate conditions consistent with incoming rain and can therefore contribute to a decision to hold off spraying. |
 | **PM2.5 / PM10** | Airborne particulate concentration (µg/m³) |Measures airborne particulate concentration and provides an input/proxy for the system’s cleaning and hazard-detection logic. |
 | **Energy meter** | Voltage, current, power & energy (kWh) | Measures real electrical output, grounding the cost-benefit engine in actual generated power rather than estimates alone and enabling true energy monitoring |
 
