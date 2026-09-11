@@ -115,6 +115,7 @@ Working prototype — built, deployed, and tested. Core control logic verified i
 ## Intellectual Property
 
 Aspects of the Naga 1.2 system, in particular its hazard-detection method, are the subject of a **pending petty patent**. This repository is provided as a technical showcase; all rights in the underlying invention are reserved by the author.
+Thai petty patent application no. 2603003908, filed 27 August 2026 — pending
 
 ---
 
