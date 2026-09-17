@@ -37,7 +37,7 @@ Naga 1.2 uses a **heterogeneous FPGA + microcontroller design**, assigning each 
 
 | Layer | Processor | Responsibility |
 |-------|-----------|----------------|
-| **Sensing & Intelligence** | ESP32-S3 | Reads sensors, runs detection & cost-benefit logic, serves dashboard, logs, connectivity |
+| **Sensing & Intelligence** | ESP32-S3 | Reads sensors, runs detection & cost-benefit logic, serves the dashboard, manage logs and connectivity |
 | **Real-Time Control** | Arty S7-25 (Spartan-7) | Runs the actuation FSM in dedicated hardware, providing deterministic pump/valve control independent of MCU task scheduling once a condition flag is asserted. |
 
 This separation keeps timing-critical actuation logic in dedicated hardware, so execution does not depend on the microcontroller’s other software tasks once an actuation condition has been issued.
@@ -65,7 +65,7 @@ physical pump/valve spray test **passed**
 ## Key Engineering
 
 ### Digital Design (FPGA / RTL)
-- Control **finite state machine** implemented in **Verilog**, deployed on a Xilinx Spartan-7 FPGA
+- Control **finite-state machine** implemented in **Verilog**, deployed on a Xilinx Spartan-7 FPGA
 - **Verified in simulation** (testbench + waveform analysis) before hardware deployment
 - **Pulse-based spray control** — evaporative cooling bursts vs. flow-based cleaning, timed entirely in hardware
 - Priority-driven safety overrides (fire → emergency response, always highest priority)
@@ -75,7 +75,7 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 
 | Sensor | Measures | Its job in the system |
 |--------|----------|-----------------------|
-| **Solar irradiance** | Incident solar energy (W/m²) | Measures incident solar irradiance and provides an input for estimating potential recoverable energy, helping suppress unnecessary actuation when available solar input is low, such as at night or under heavy cloud. |
+| **Solar irradiance** | Incident solar irradiance (W/m²) | Measures incident solar irradiance and provides an input for estimating potential recoverable energy, helping suppress unnecessary actuation when available solar input is low, such as at night or under heavy cloud. |
 | **Temperature / Humidity** | Air temperature & relative humidity (radiation-shielded) | Provides environmental context that can be used to suppress unnecessary actuation under changing weather conditions. Rising humidity together with falling temperature can indicate conditions consistent with incoming rain and can therefore contribute to a decision to hold off spraying. |
 | **PM2.5 / PM10** | Airborne particulate concentration (µg/m³) |Measures airborne particulate concentration and provides an input/proxy for the system’s cleaning and hazard-detection logic. |
 | **Energy meter** | Voltage, current, power & energy (kWh) | Measures mains-side electrical parameters (voltage, current, power and energy). This provides a real electrical reference for system monitoring and for estimating actuation cost, rather than relying solely on fixed assumptions. |
@@ -84,8 +84,8 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 - Robust against bus turnaround noise and marginal connections
 
 ### Edge Decision Logic
-- On-device **cost-benefit engine** — estimates recoverable energy (from live irradiance + panel temperature) against the water and pump-energy cost of a cycle
-- The system actuates **only when it's genuinely worthwhile**, scaling with real-time solar conditions
+- On-device **cost-benefit engine** — compares estimated recoverable energy (from live irradiance + panel temperature) against the water and pump-energy cost of a cycle
+- The system actuates **only when it is genuinely worthwhile**, based on real-time solar conditions
 
 ### Hazard Detection *(patent-pending)*
 - A **gradient / trend-analysis layer** examines how conditions change over time to distinguish genuine hazards from ordinary environmental variation
@@ -94,7 +94,7 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 ### Power & Hardware
 - Mains-derived **24 V / 5 V / 3.3 V** rails with protected conversion
 - **Solid-state relay** switching for a 24 V pump and solenoid valve
-- Designed to run **headless** from mains, both boards booting autonomously from flash
+- Designed to run **headless** from mains power, with both boards booting autonomously from flash
 
 ### Connectivity
 - Locally served **web dashboard** (HTML/CSS/JS) over WiFi — live readings, system state, and manual controls
@@ -119,7 +119,7 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 | Panel temperature high (and worthwhile) | Evaporative cooling — pulsed spray |
 | Dust accumulation high (and worthwhile) | Cleaning — flow-based rinse |
 | Fire condition confirmed by ESP32 | Emergency response (highest priority) |
-| Rain detected / incoming | Spraying suspended — nature does the work |
+| Conditions consistent with incoming rain | Spraying suspended — nature does the work |
 | Manual stop | Immediate safe shutdown |
 
 ---
@@ -133,7 +133,7 @@ End-to-end physical integration and spray validation completed — 17 September 
 *Behavioral simulation in Vivado confirming state transitions, pulse-spray 
 timing, and safety overrides — verified before hardware deployment.*
 
-### Pump and valve actuated by Arty S7-25 through SSR module
+### Pump and valve actuated by the Arty S7-25 through SSR module
 
 [Naga 1.2 pump/valve demo video](https://github.com/user-attachments/assets/a7b8bf91-096e-45de-beac-b509bfeb956e)
 
@@ -145,7 +145,7 @@ timing, and safety overrides — verified before hardware deployment.*
 
 ## Intellectual Property
 
-Aspects of the Naga 1.2 system, in particular its hazard-detection method, are the subject of a **pending petty patent**. This repository is provided as a technical showcase; all rights in the underlying invention are reserved by the author.
+Aspects of the Naga 1.2 system, in particular its hazard-detection method, are the subject of a **pending Thai petty patent** application. This repository is provided as a technical showcase; all rights in the underlying invention are reserved by the author.
 Thai petty patent application no. 2603003908, filed 27 August 2026 — pending
 
 ---
