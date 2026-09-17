@@ -78,7 +78,7 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 | **Solar irradiance** | Incident solar energy (W/m²) | Measures incident solar irradiance and provides an input for estimating potential recoverable energy, helping suppress unnecessary actuation when available solar input is low, such as at night or under heavy cloud. |
 | **Temperature / Humidity** | Air temperature & relative humidity (radiation-shielded) | Provides environmental context that can be used to suppress unnecessary actuation under changing weather conditions. Rising humidity together with falling temperature can indicate conditions consistent with incoming rain and can therefore contribute to a decision to hold off spraying. |
 | **PM2.5 / PM10** | Airborne particulate concentration (µg/m³) |Measures airborne particulate concentration and provides an input/proxy for the system’s cleaning and hazard-detection logic. |
-| **Energy meter** | Voltage, current, power & energy (kWh) | Measures real electrical output, grounding the cost-benefit engine in actual generated power rather than estimates alone and enabling true energy monitoring |
+| **Energy meter** | Voltage, current, power & energy (kWh) | Measures mains-side electrical parameters (voltage, current, power and energy). This provides a real electrical reference for system monitoring and for estimating actuation cost, rather than relying solely on fixed assumptions. |
 
 - Custom **Modbus-RTU** implementation with CRC-16 validation, frame synchronisation, echo handling, and automatic retries
 - Robust against bus turnaround noise and marginal connections
@@ -93,7 +93,7 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 
 ### Power & Hardware
 - Mains-derived **24 V / 5 V / 3.3 V** rails with protected conversion
-- **Solid-state relay** switching with inductive-load (flyback) protection
+- **Solid-state relay** switching for a 24 V pump and solenoid valve
 - Designed to run **headless** from mains, both boards booting autonomously from flash
 
 ### Connectivity
@@ -118,7 +118,7 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 |-----------|----------|
 | Panel temperature high (and worthwhile) | Evaporative cooling — pulsed spray |
 | Dust accumulation high (and worthwhile) | Cleaning — flow-based rinse |
-| Fire signature detected | Emergency response (highest priority) |
+| Fire condition confirmed by ESP32 | Emergency response (highest priority) |
 | Rain detected / incoming | Spraying suspended — nature does the work |
 | Manual stop | Immediate safe shutdown |
 
@@ -133,7 +133,7 @@ End-to-end physical integration and spray validation completed — 17 September 
 *Behavioral simulation in Vivado confirming state transitions, pulse-spray 
 timing, and safety overrides — verified before hardware deployment.*
 
-### Pump and valve actuated by Arty A7 through SSR module
+### Pump and valve actuated by Arty S7-25 through SSR module
 
 [Naga 1.2 pump/valve demo video](https://github.com/user-attachments/assets/a7b8bf91-096e-45de-beac-b509bfeb956e)
 
