@@ -41,6 +41,20 @@ Naga 1.2 uses a **heterogeneous FPGA + microcontroller design**, assigning each 
 | **Real-Time Control** | Arty S7-25 (Spartan-7) | Runs the actuation FSM in dedicated hardware, providing deterministic pump/valve control independent of MCU task scheduling once a condition flag is asserted. |
 
 This separation keeps timing-critical actuation logic in dedicated hardware, so execution does not depend on the microcontroller’s other software tasks once an actuation condition has been issued.
+
+## System Verification:
+
+Verilog FSM simulation/testbench
+pulse-spray control
+state/status outputs
+
+## Physical validation:
+
+ESP-to-FPGA GPIO integration **passed**
+FPGA actuator control **passed**
+SSR switching **validated**
+physical pump/valve spray test **passed**
+
 ---
 
 ## Key Engineering
