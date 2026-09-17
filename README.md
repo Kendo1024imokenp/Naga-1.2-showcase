@@ -45,14 +45,19 @@ This separation keeps timing-critical actuation logic in dedicated hardware, so 
 ## System Verification:
 
 Verilog FSM simulation/testbench
+
 pulse-spray control
+
 state/status outputs
 
 ## Physical validation:
 
 ESP-to-FPGA GPIO integration **passed**
+
 FPGA actuator control **passed**
+
 SSR switching **validated**
+
 physical pump/valve spray test **passed**
 
 ---
