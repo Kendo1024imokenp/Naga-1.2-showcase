@@ -107,7 +107,7 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 
 ## Project Status
 
-Individual subsystems (FPGA control logic, sensor network, and decision software) have been verified; full physical integration is in progress.
+End-to-end physical integration and spray validation completed — 17 September 2026.
 
 ### FSM Verification (Simulation)
 ![Naga 1.2 FSM simulation waveform](waveformsim.png)
