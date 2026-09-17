@@ -37,7 +37,7 @@ Naga 1.2 uses a **heterogeneous FPGA + microcontroller design**, assigning each 
 
 | Layer | Processor | Responsibility |
 |-------|-----------|----------------|
-| **Sensing & Intelligence** | ESP32-S3 | Reads sensors, runs detection & cost-benefit logic, serves the dashboard, manage logs and connectivity |
+| **Sensing & Intelligence** | ESP32-S3 | Reads sensors, runs detection & cost-benefit logic, serves the dashboard, manages logs and connectivity |
 | **Real-Time Control** | Arty S7-25 (Spartan-7) | Runs the actuation FSM in dedicated hardware, providing deterministic pump/valve control independent of MCU task scheduling once a condition flag is asserted. |
 
 This separation keeps timing-critical actuation logic in dedicated hardware, so execution does not depend on the microcontroller’s other software tasks once an actuation condition has been issued.
@@ -116,8 +116,8 @@ Naga 1.2 upgrades to a suite of **industrial-grade RS-485 sensors** sharing a si
 
 | Condition | Response |
 |-----------|----------|
-| Panel temperature high (and worthwhile) | Evaporative cooling — pulsed spray |
-| Dust accumulation high (and worthwhile) | Cleaning — flow-based rinse |
+| High panel temperature (and worthwhile) | Evaporative cooling — pulsed spray |
+| High dust level (and worthwhile) | Cleaning — flow-based rinse |
 | Fire condition confirmed by ESP32 | Emergency response (highest priority) |
 | Conditions consistent with incoming rain | Spraying suspended — nature does the work |
 | Manual stop | Immediate safe shutdown |
