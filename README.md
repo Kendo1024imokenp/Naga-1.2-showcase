@@ -139,6 +139,7 @@ timing, and safety overrides — verified before hardware deployment.*
 
 ### System cabinet 
 
+[working system](https://github.com/user-attachments/assets/c1a12b81-b224-4e52-8800-847f028d3f02)
 
 ---
 
