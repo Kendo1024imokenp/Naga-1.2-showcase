@@ -135,7 +135,7 @@ timing, and safety overrides — verified before hardware deployment.*
 
 ### Pump and valve actuated by Arty A7 through SSR module
 
-[Naga 1.2 pump/valve demo video](https://github.com/Kendo1024imokenp/Naga-1.2-showcase/blob/main/Naga-1.2-showcase/ScreenRecording_09-17-2026%2016-27-05_1.mov)
+[[Naga 1.2 pump/valve demo video](https://github.com/Kendo1024imokenp/Naga-1.2-showcase/blob/main/Naga-1.2-showcase/ScreenRecording_09-17-2026%2016-27-05_1.mov)](https://github.com/user-attachments/assets/a7b8bf91-096e-45de-beac-b509bfeb956e)
 
 ### System cabinet 
 
