@@ -133,6 +133,13 @@ End-to-end physical integration and spray validation completed — 17 September 
 *Behavioral simulation in Vivado confirming state transitions, pulse-spray 
 timing, and safety overrides — verified before hardware deployment.*
 
+### Pump and valve actuated by Arty A7 through SSR module
+
+![Naga 1.2 pumpvalve](ScreenRecording_09-17-2026 16-27-05_1.mov)
+
+### System cabinet 
+
+
 ---
 
 ## Intellectual Property
